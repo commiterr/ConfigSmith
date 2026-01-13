@@ -1,0 +1,107 @@
+# ConfigSmith Configuration Example
+# Copy to .configsmith.yml and customize
+
+# Scanning options
+scan:
+  # Directories to scan
+  include:
+    - src/
+    - lib/
+    - app/
+    - server/
+    - utils/
+  
+  # Patterns to exclude
+  exclude:
+    - node_modules/
+    - venv/
+    - .venv/
+    - dist/
+    - build/
+    - __pycache__/
+    - "*.test.*"
+    - "*.spec.*"
+  
+  # File extensions to scan
+  extensions:
+    - .py
+    - .ts
+    - .js
+    - .tsx
+    - .jsx
+  
+  # Maximum file size (bytes)
+  max_file_size: 1048576  # 1MB
+
+# Generation options
+generate:
+  # Output file
+  output: .env.example
+  
+  # Create backup before overwriting
+  backup: true
+  
+  # Sorting method: alphabetical, category, source, none
+  sort: alphabetical
+  
+  # Grouping: category, file, type, none
+  group_by: category
+  
+  # Include metadata in comments
+  include:
+    source_file: true
+    type_hint: true
+    default_value: true
+    description: true
+  
+  # Format options
+  format:
+    line_length: 80
+    spacing: true  # Add blank lines between groups
+
+# Categorization rules
+categories:
+  database:
+    patterns:
+      - "^DB_"
+      - "^DATABASE_"
+      - "^POSTGRES_"
+      - "^MYSQL_"
+      - "^MONGO_"
+    description: "Database Configuration"
+  
+  api:
+    patterns:
+      - "^API_"
+      - "_API_KEY$"
+      - "_TOKEN$"
+    description: "API Configuration"
+  
+  app:
+    patterns:
+      - "^APP_"
+      - "^PORT$"
+      - "^HOST$"
+      - "^NODE_ENV$"
+    description: "Application Settings"
+  
+  auth:
+    patterns:
+      - "^AUTH_"
+      - "^JWT_"
+      - "^SESSION_"
+      - "^OAUTH_"
+    description: "Authentication"
+
+# Security settings
+security:
+  # Patterns that indicate sensitive values
+  sensitive_patterns:
+    - ".*KEY$"
+    - ".*SECRET.*"
+    - ".*PASSWORD.*"
+    - ".*TOKEN$"
+    - ".*CREDENTIAL.*"
+  
+  # Add security warnings for sensitive vars
+  warn_on_sensitive: true
